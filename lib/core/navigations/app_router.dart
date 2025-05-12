@@ -1,4 +1,5 @@
 import 'package:clean_architecture_practice/app_list.dart';
+import 'package:clean_architecture_practice/core/utils/app_routes.dart';
 import 'package:clean_architecture_practice/features/todo/data/respositories/todo_repository_impl.dart';
 import 'package:clean_architecture_practice/features/todo/domain/usecases/add_todo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,8 +22,8 @@ class AppRouter {
         builder: (context, state) => const AppList(),
       ),
       GoRoute(
-        path: '/todo',
-        name: 'todo',
+        path: AppRoutes.todoScreen,
+        name: 'todoScreen',
         builder: (context, state) {
           return BlocProvider(
             create: (_) => TodoBloc(
