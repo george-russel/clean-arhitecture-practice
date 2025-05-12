@@ -8,7 +8,7 @@ abstract class TodoRepository {
 
   Future<Either<Failure, TodoEntity>> addTodo({required TodoParams params});
 
-  Future<Either<Failure, TodoEntity>> toggleTodo({required TodoParams params});
+  Future<Either<Failure, TodoEntity>> toggleTodo(String id);
 
   Future<Either<Failure, void>> deleteTodo(String id);
 }
