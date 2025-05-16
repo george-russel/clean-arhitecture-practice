@@ -27,6 +27,10 @@ class AppList extends StatelessWidget {
               PrimaryButton(
                 label: 'Todo App',
                 onPressed: () => context.push(AppRoutes.todoScreen),
+              ),
+              PrimaryButton(
+                label: 'Login',
+                onPressed: () => context.push(AppRoutes.loginScreen),
               )
             ],
           ),

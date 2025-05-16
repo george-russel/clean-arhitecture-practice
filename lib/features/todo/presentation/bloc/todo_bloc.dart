@@ -6,8 +6,6 @@ import 'package:clean_architecture_practice/features/todo/presentation/bloc/todo
 import 'package:clean_architecture_practice/features/todo/presentation/bloc/todo_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/todo_entity.dart';
-
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   TodoBloc({
     required this.getTodosUseCase,
@@ -49,12 +47,12 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
       result.fold(
         (failure) => emit(TodoError(failure.errorMessage)),
-        (todo) {
-          if (state is TodoLoaded) {
-            final updatedTodos =
-                List<TodoEntity>.from((state as TodoLoaded).todos)..add(todo);
-            emit(TodoLoaded(updatedTodos));
-          }
+        (todos) {
+          // if (state is TodoLoaded) {
+          //   final updatedTodos =
+          //       List<TodoEntity>.from((state as TodoLoaded).todos)..add(todo);
+          emit(TodoLoaded(todos));
+          // }
         },
       );
     } catch (e) {
@@ -71,14 +69,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
 
       result.fold(
         (failure) => emit(TodoError(failure.errorMessage)),
-        (_) {
-          if (state is TodoLoaded) {
-            final updatedTodos = (state as TodoLoaded)
-                .todos
-                .where((todo) => todo.id != event.id)
-                .toList();
-            emit(TodoLoaded(updatedTodos));
-          }
+        (todos) {
+          // if (state is TodoLoaded) {
+          //   final updatedTodos = (state as TodoLoaded)
+          //       .todos
+          //       .where((todo) => todo.id != event.id)
+          //       .toList();
+          emit(TodoLoaded(todos));
+          // }
         },
       );
     } catch (e) {
@@ -91,18 +89,19 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     try {
       emit(TodoLoading());
 
-      final result = await toggleTodoUseCase(event.id);
+      final result = await toggleTodoUseCase.call(event.id);
 
+      print('PRINT $result');
       result.fold(
         (failure) => emit(TodoError(failure.errorMessage)),
-        (todo) {
-          if (state is TodoLoaded) {
-            final updatedTodos = (state as TodoLoaded)
-                .todos
-                .map((t) => t.id == todo.id ? todo : t)
-                .toList();
-            emit(TodoLoaded(updatedTodos));
-          }
+        (todos) {
+          // if (state is TodoLoaded) {
+          //   final updatedTodos = (state as TodoLoaded)
+          //       .todos
+          //       .map((t) => t.id == todo.id ? todo : t)
+          //       .toList();
+          emit(TodoLoaded(todos));
+          // }
         },
       );
     } catch (e) {

@@ -9,7 +9,7 @@ class ToggleTodoUseCase {
 
   ToggleTodoUseCase({required this.repository});
 
-  Future<Either<Failure, TodoEntity>> call(String id) async {
+  Future<Either<Failure, List<TodoEntity>>> call(String id) async {
     return repository.toggleTodo(id);
   }
 }

@@ -6,9 +6,10 @@ import 'package:dartz/dartz.dart';
 abstract class TodoRepository {
   Future<Either<Failure, List<TodoEntity>>> getTodos();
 
-  Future<Either<Failure, TodoEntity>> addTodo({required TodoParams params});
+  Future<Either<Failure, List<TodoEntity>>> addTodo(
+      {required TodoParams params});
 
-  Future<Either<Failure, TodoEntity>> toggleTodo(String id);
+  Future<Either<Failure, List<TodoEntity>>> toggleTodo(String id);
 
-  Future<Either<Failure, void>> deleteTodo(String id);
+  Future<Either<Failure, List<TodoEntity>>> deleteTodo(String id);
 }

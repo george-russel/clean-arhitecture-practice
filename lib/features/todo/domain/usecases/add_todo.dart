@@ -10,7 +10,7 @@ class AddTodoUseCase {
 
   AddTodoUseCase({required this.repository});
 
-  Future<Either<Failure, TodoEntity>> call(TodoParams params) async {
+  Future<Either<Failure, List<TodoEntity>>> call(TodoParams params) async {
     return repository.addTodo(params: params);
   }
 }

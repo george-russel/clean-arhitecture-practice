@@ -12,7 +12,6 @@ class TodoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = AppColors.todoColors;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todo List'),
@@ -26,7 +25,6 @@ class TodoListScreen extends StatelessWidget {
             return Center(child: Text(state.message));
           } else if (state is TodoLoaded) {
             final todos = state.todos;
-
             if (todos.isEmpty) {
               return const Center(child: Text('No todos yet.'));
             }
@@ -38,7 +36,7 @@ class TodoListScreen extends StatelessWidget {
                 final todo = todos[index];
                 final bgColor = colors[index % colors.length];
                 const textColor = Colors.black87;
-
+                print('TODO ID ${todo.id}');
                 return Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
@@ -89,6 +87,8 @@ class TodoListScreen extends StatelessWidget {
                       },
                     ),
                     onTap: () {
+                      print('PRINTT::::');
+                      print('ID ${todo.id}');
                       context.read<TodoBloc>().add(ToggleTodo(todo.id));
                     },
                   ),
